@@ -1,6 +1,9 @@
 FROM alpine:latest
 
-LABEL io.github.arifai.image.souce=https://github.com/arifai/docker-android-sdk
+LABEL io.github.arifai.images.souce https://github.com/arifai/docker-android-sdk
+LABEL org.opencontainers.image.source https://github.com/arifai/docker-android-sdk
+LABEL org.opencontainers.image.description Android Command Line Tools
+LABEL org.opencontainers.image.licenses MIT
 
 ENV ANDROID_SDK_TOOLS_VERSION 10406996
 ENV ANDROID_HOME /opt/Android/Sdk
