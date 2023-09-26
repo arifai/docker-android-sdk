@@ -27,6 +27,7 @@ jobs:
 
   tools:
     needs: [build_and_push]
+    runs-on: ubuntu-latest
     steps:
       - name: Build and push tools to ghcr.io
         uses: docker/build-push-action@v5
