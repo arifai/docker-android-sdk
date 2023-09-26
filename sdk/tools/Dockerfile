@@ -2,14 +2,6 @@ FROM alpine:latest
 
 LABEL io.github.arifai.image.souce=https://github.com/arifai/docker-android-sdk
 
-ENV ANDROID_USER Android
-
-RUN adduser -D \
-  -g "Android" \
-  -h "$(pwd)" \
-  -S "$ANDROID_USER" \
-  -H "$ANDROID_USER"
-
 ENV ANDROID_SDK_TOOLS_VERSION 10406996
 ENV ANDROID_HOME /opt/Android/Sdk
 ENV ANDROID_PLATFORM_VERSION 34
@@ -26,11 +18,7 @@ RUN mkdir .android && touch .android/repositories.cfg \
   && rm sdk-tools.zip \
   && rm -rf /var/lib/apt/lists/* \
   && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_BUILD_TOOLS_ROOT} \
-  && yes | sdkmanager --licenses \
-  && chown ${ANDROID_USER} .android \
-  && chown ${ANDROID_HOME}
-  
-USER ${ANDROID_USER}
+  && yes | sdkmanager --licenses 
 
 RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "platform-tools" \
   "platforms;android-$ANDROID_PLATFORM_VERSION"
