@@ -1,8 +1,5 @@
 name: Publish Registry to ghcr.io
 
-env:
-  DOCKER_TAG: ghcr.io/${{ github.repository_owner }}/android-sdk
-
 on:
   push:
     branches:
@@ -32,8 +29,8 @@ jobs:
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           tags: | 
-            $DOCKER_TAG:tools
-            $DOCKER_TAG:latest
+            ghcr.io/${{ github.repository_owner }}/android-sdk:tools
+            ghcr.io/${{ github.repository_owner }}/android-sdk:latest
 
   ndk:
     permissions: write-all
@@ -56,5 +53,5 @@ jobs:
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           tags: | 
-            $DOCKER_TAG:ndk
-            $DOCKER_TAG:latest
+            ghcr.io/${{ github.repository_owner }}/android-sdk:ndk
+            ghcr.io/${{ github.repository_owner }}/android-sdk:latest
