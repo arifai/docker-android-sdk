@@ -39,7 +39,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     if: ${{ always() }}
-    needs: [publish-sdk]
+    needs: [tools]
     steps:
       - name: Checkout ${{ github.ref }} Branch in ${{ github.repository }} Repository
         uses: actions/checkout@v3
