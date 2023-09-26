@@ -32,7 +32,7 @@ jobs:
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           tags: | 
-            $DOCKER_TAG:${{ steps.vars.outputs.tag }}
+            $DOCKER_TAG:tools
             $DOCKER_TAG:latest
 
   ndk:
@@ -56,5 +56,5 @@ jobs:
           push: true
           labels: ${{ steps.meta.outputs.labels }}
           tags: | 
-            $DOCKER_TAG:${{ steps.vars.outputs.tag }}
+            $DOCKER_TAG:ndk
             $DOCKER_TAG:latest
