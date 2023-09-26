@@ -1,0 +1,30 @@
+name: Publish Registry to ghcr.io
+
+env:
+  DOCKER_TAG: ghcr.io/arifai/android-sdk:latest
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+  steps:
+    - name: Checkout ${{ github.ref }} Branch in ${{ github.repository }} Repository
+      uses: actions/checkout@v3
+    - name: Login to ghcr.io
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build ${{ github.repository }} Docker image
+      run: |
+        docker build -t $DOCKER_TAG -f sdk/tools/Dockerfile .
+        docker push $DOCKER_TAG
