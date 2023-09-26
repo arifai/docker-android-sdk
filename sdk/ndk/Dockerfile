@@ -1,4 +1,4 @@
-FROM android-sdk:latest
+FROM ghcr.io/arifai/android-sdk:latest
 
 ENV ANDROID_NDK_VERSION 25.2.9519653
 
