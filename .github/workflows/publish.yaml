@@ -1,5 +1,8 @@
 name: Publish Registry to ghcr.io
 
+env:
+  DOCKER_TAG: ghcr.io/arifai/android-sdk
+
 on:
   push:
     branches:
@@ -14,10 +17,8 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Checkout ${{ github.ref }} Branch in ${{ github.repository }} Repository
+        uses: actions/checkout@v4
       - name: Login to ghcr.io
         uses: docker/login-action@v3
         with:
@@ -25,14 +26,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build ${{ github.repository }} and push to ghcr.io
-        uses: docker/build-push-action@v5
-        with:
-          context: '{{defaultContext}}:sdk/tools'
-          push: true
-          labels: ${{ steps.meta.outputs.labels }}
-          tags: | 
-            ghcr.io/${{ github.repository_owner }}/android-sdk:tools
-            ghcr.io/${{ github.repository_owner }}/android-sdk:latest
+        run: |
+          docker build -t $DOCKER_TAG:latest -t $DOCKER_TAG:tools -f sdk/tools/Dockerfile .
+          docker push $DOCKER_TAG --all-tags
 
   ndk:
     permissions: write-all
@@ -40,10 +36,8 @@ jobs:
     if: ${{ always() }}
     needs: [tools]
     steps:
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+      - name: Checkout ${{ github.ref }} Branch in ${{ github.repository }} Repository
+        uses: actions/checkout@v4
       - name: Login to ghcr.io
         uses: docker/login-action@v3
         with:
@@ -51,10 +45,6 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build ${{ github.repository }} and push to ghcr.io
-        uses: docker/build-push-action@v5
-        with:
-          context: '{{defaultContext}}:sdk/ndk'
-          push: true
-          labels: ${{ steps.meta.outputs.labels }}
-          tags: | 
-            ghcr.io/${{ github.repository_owner }}/android-sdk:ndk-26
+        run: |
+          docker build -t $DOCKER_TAG:ndk-26 -f sdk/ndk/Dockerfile .
+          docker push $DOCKER_TAG
