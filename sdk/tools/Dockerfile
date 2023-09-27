@@ -22,6 +22,9 @@ RUN mkdir .android && touch .android/repositories.cfg \
   && echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
   && apk update \ 
   && apk add git bash wget zip unzip lcov@testing curl xz mesa openjdk21-jdk@testing --no-cache \
+  && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
+  && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r1/glibc-2.35-r1.apk \
+  && apk add glibc-2.35-r1.apk \
   && wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS_VERSION}_latest.zip -O sdk-tools.zip \
   && mkdir -p ${ANDROID_HOME}/cmdline-tools \
   && unzip -q sdk-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
