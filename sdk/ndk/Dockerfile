@@ -6,4 +6,4 @@ LABEL org.opencontainers.image.licenses MIT
 
 ENV ANDROID_NDK_VERSION 26.0.10792818
 
-RUN set -eux; yes | sdkmanager "ndk;$ANDROID_NDK_VERSION"
+RUN yes | sdkmanager "ndk;$ANDROID_NDK_VERSION"
