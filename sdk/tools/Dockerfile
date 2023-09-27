@@ -11,12 +11,6 @@ ENV ANDROID_PLATFORM_VERSION 34
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 ENV ANDROID_BUILD_TOOLS_ROOT ${ANDROID_HOME}/cmdline-tools/latest
 ENV PATH "$ANDROID_BUILD_TOOLS_ROOT/bin:$PATH"
-ENV ANDROID_USER android
-
-RUN addgroup -S ${ANDROID_USER} \ 
-  && adduser \
-  -S ${ANDROID_USER} \
-  -G ${ANDROID_USER} -D
 
 RUN mkdir .android && touch .android/repositories.cfg \
   && echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
@@ -32,11 +26,6 @@ RUN mkdir .android && touch .android/repositories.cfg \
   && rm -rf /var/lib/apt/lists/* \
   && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_BUILD_TOOLS_ROOT} \
   && yes | sdkmanager --licenses 
-
-RUN chown -R ${ANDROID_USER}:${ANDROID_USER} .android \
-  && chown -R ${ANDROID_USER}:${ANDROID_USER} ${ANDROID_HOME}
-
-USER ${ANDROID_USER}
 
 RUN sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "platform-tools" \
   "platforms;android-$ANDROID_PLATFORM_VERSION"
