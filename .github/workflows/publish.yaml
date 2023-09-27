@@ -47,4 +47,4 @@ jobs:
       - name: Build ${{ github.repository }} and push to ghcr.io
         run: |
           docker build -t $DOCKER_TAG:ndk-26 -f sdk/ndk/Dockerfile .
-          docker push $DOCKER_TAG
+          docker push $DOCKER_TAG:ndk-26
