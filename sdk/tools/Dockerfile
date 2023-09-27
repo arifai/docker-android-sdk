@@ -13,6 +13,8 @@ ENV ANDROID_BUILD_TOOLS_ROOT ${ANDROID_HOME}/cmdline-tools/latest
 ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk
 ENV PATH "$PATH:$ANDROID_BUILD_TOOLS_ROOT/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME/bin"
 
+RUN set -eux; export JAVA_HOME=${JAVA_HOME}
+
 RUN set -eux; mkdir .android && touch .android/repositories.cfg \
   && echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
   && apk update \ 
