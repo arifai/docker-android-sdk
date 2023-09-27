@@ -10,12 +10,13 @@ ENV ANDROID_HOME /opt/Android/Sdk
 ENV ANDROID_PLATFORM_VERSION 34
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 ENV ANDROID_BUILD_TOOLS_ROOT ${ANDROID_HOME}/cmdline-tools/latest
-ENV PATH "$PATH:$ANDROID_BUILD_TOOLS_ROOT/bin:$ANDROID_HOME/platform-tools"
+ENV JAVA_HOME /usr/lib/jvm/java-21-openjdk
+ENV PATH "$PATH:$ANDROID_BUILD_TOOLS_ROOT/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME/bin"
 
 RUN set -eux; mkdir .android && touch .android/repositories.cfg \
   && echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
   && apk update \ 
-  && apk add git bash wget zip unzip lcov@testing gcompat curl xz mesa openjdk21-jdk@testing --no-cache \
+  && apk add git bash make wget zip unzip lcov@testing gcompat curl xz mesa openjdk21-jdk@testing --no-cache \
   && wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS_VERSION}_latest.zip -O sdk-tools.zip \
   && mkdir -p ${ANDROID_HOME}/cmdline-tools \
   && unzip -q sdk-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
