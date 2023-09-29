@@ -1,7 +1,7 @@
 FROM ghcr.io/arifai/android-sdk:latest
 
 LABEL org.opencontainers.image.source https://github.com/arifai/docker-android-sdk
-LABEL org.opencontainers.image.description Android NDK on Alpine Linux
+LABEL org.opencontainers.image.description Android NDK on Ubuntu Linux
 LABEL org.opencontainers.image.licenses MIT
 
 ENV ANDROID_NDK_VERSION 26.0.10792818
