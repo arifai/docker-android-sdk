@@ -11,7 +11,7 @@ ENV ANDROID_HOME /opt/Android/Sdk
 ENV ANDROID_PLATFORM_VERSION 34
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 ENV ANDROID_BUILD_TOOLS_ROOT ${ANDROID_HOME}/cmdline-tools/latest
-ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-arm64
+ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64
 ENV PATH "$PATH:$ANDROID_BUILD_TOOLS_ROOT/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME/bin"
 
 RUN set -eux; groupadd -r ${ANDROID_USER} \
