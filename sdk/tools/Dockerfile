@@ -11,7 +11,7 @@ ENV ANDROID_HOME /opt/Android/Sdk
 ENV ANDROID_PLATFORM_VERSION 34
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
 ENV ANDROID_BUILD_TOOLS_ROOT ${ANDROID_HOME}/cmdline-tools/latest
-ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-19-openjdk-arm64
 ENV PATH "$PATH:$ANDROID_BUILD_TOOLS_ROOT/bin:$ANDROID_HOME/platform-tools:$JAVA_HOME/bin"
 
 RUN set -eux; groupadd -r ${ANDROID_USER} \
@@ -27,10 +27,6 @@ RUN set -eux; mkdir .android && touch .android/repositories.cfg \
   && rm sdk-tools.zip \
   && rm -rf /var/lib/apt/lists/* \
   && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_BUILD_TOOLS_ROOT} 
-
-WORKDIR /${ANDROID_USER}
-
-RUN chown -R ${ANDROID_USER}:${ANDROID_USER} /${ANDROID_USER}
 
 RUN set -eux; yes | sdkmanager --licenses \
   && sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "platform-tools" \
