@@ -32,8 +32,6 @@ WORKDIR /${ANDROID_USER}
 
 RUN chown -R ${ANDROID_USER}:${ANDROID_USER} /${ANDROID_USER}
 
-USER ${ANDROID_USER}
-
 RUN set -eux; yes | sdkmanager --licenses \
   && sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "platform-tools" \
   "platforms;android-$ANDROID_PLATFORM_VERSION"
