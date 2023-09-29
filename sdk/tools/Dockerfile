@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-LABEL io.github.arifai.images.souce https://github.com/arifai/docker-android-sdk
+LABEL io.github.arifai.image.souce https://github.com/arifai/docker-android-sdk
 LABEL org.opencontainers.image.source https://github.com/arifai/docker-android-sdk
 LABEL org.opencontainers.image.description Android Command Line Tools on Ubuntu Linux
 LABEL org.opencontainers.image.licenses MIT
