@@ -16,13 +16,15 @@ ENV PATH "$PATH:$ANDROID_BUILD_TOOLS_ROOT/bin:$ANDROID_HOME/platform-tools:$JAVA
 
 RUN set -eux; mkdir .android && touch .android/repositories.cfg \
   && apt-get update && apt-get upgrade -y \ 
-  && apt-get install git wget zip make unzip lcov curl xz-utils libglu1-mesa openjdk-19-jdk -y --no-install-recommends \
-  && rm -r /var/lib/apt/lists/* \
-  && wget -q https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS_VERSION}_latest.zip -O sdk-tools.zip \
+  && apt-get install git zip make unzip lcov curl xz-utils libglu1-mesa openjdk-19-jdk -y --no-install-recommends \
+  && curl https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS_VERSION}_latest.zip -o sdk-tools.zip \
   && mkdir -p ${ANDROID_HOME}/cmdline-tools \
   && unzip -q sdk-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
   && rm sdk-tools.zip \
-  && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_BUILD_TOOLS_ROOT} 
+  && mv ${ANDROID_HOME}/cmdline-tools/cmdline-tools ${ANDROID_BUILD_TOOLS_ROOT} \
+  && apt purge unzip -y \
+  && apt-get autoremove \
+  && rm -rf /var/lib/apt/lists/* 
 
 RUN set -eux; yes | sdkmanager --licenses \
   && sdkmanager "build-tools;$ANDROID_BUILD_TOOLS_VERSION" "platform-tools" \
