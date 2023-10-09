@@ -16,7 +16,7 @@ ENV PATH "$PATH:$ANDROID_BUILD_TOOLS_ROOT/bin:$ANDROID_HOME/platform-tools:$JAVA
 
 RUN set -eux; mkdir .android && touch .android/repositories.cfg \
   && apt-get update && apt-get upgrade -y \ 
-  && apt-get install git zip make unzip lcov curl xz-utils libglu1-mesa openjdk-19-jdk -y --no-install-recommends \
+  && apt-get install zip make unzip lcov curl xz-utils libglu1-mesa openjdk-19-jdk -y --no-install-recommends \
   && curl https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS_VERSION}_latest.zip -o sdk-tools.zip \
   && mkdir -p ${ANDROID_HOME}/cmdline-tools \
   && unzip -q sdk-tools.zip -d ${ANDROID_HOME}/cmdline-tools \
