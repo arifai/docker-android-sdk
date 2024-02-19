@@ -6,7 +6,7 @@ LABEL org.opencontainers.image.description Android Command Line Tools on Ubuntu 
 LABEL org.opencontainers.image.licenses MIT
 
 ENV ANDROID_USER android
-ENV ANDROID_SDK_TOOLS_VERSION 10406996
+ENV ANDROID_SDK_TOOLS_VERSION 11076708
 ENV ANDROID_HOME /opt/Android/Sdk
 ENV ANDROID_PLATFORM_VERSION 34
 ENV ANDROID_BUILD_TOOLS_VERSION 34.0.0
